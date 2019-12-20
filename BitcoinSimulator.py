@@ -1,16 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[15]:
-
-
 import networkx as nx
 import numpy as np
 from scipy.optimize import fsolve
 from progressbar import ProgressBar
-
-
-# In[16]:
 
 
 def DTPpmf(x,alpha,beta):
@@ -34,9 +25,6 @@ def discTruncPareto(n,xc,c):
     for i in range(n):
         pmf[i] = DTPpmf(i+1,alpha_solution,n)
     return(pmf)
-
-
-# In[17]:
 
 
 def createGraph(degree,normal,testing,validation):
@@ -75,8 +63,6 @@ def createGraph(degree,normal,testing,validation):
     return(G,nx.to_dict_of_lists(G),expParameters,unifParameters)
 
 
-# In[18]:
-
 
 def cascade(n,total,pmf,delaypar,processpar,AdjDict):
     # create arrival times matrix
@@ -113,9 +99,6 @@ def cascade(n,total,pmf,delaypar,processpar,AdjDict):
     return(times, source)
 
 
-# In[19]:
-
-
 # cascades to perform
 tests = 1000
 
@@ -149,9 +132,6 @@ for i in AdjDict:
 edges = edges/2
 
 
-# In[20]:
-
-
 # record cascade data
 data = np.zeros([total,tests])
 sources = np.zeros(tests)
@@ -165,9 +145,6 @@ for i in pbar(range(tests)):
 
 # create correlation matrix
 corrmatrix = np.corrcoef(data)
-
-
-# In[21]:
 
 
 np.savetxt("delay_data.csv", data, delimiter=",")
